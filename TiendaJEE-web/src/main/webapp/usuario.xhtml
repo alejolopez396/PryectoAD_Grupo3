@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Proyecto Aplicaciones</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="plantilla.xhtml">
+            <ui:define name="content">
+                <h:form id="formprincipal">
+
+                    <p:panel header="#{usuarioManagedBean.usuario.codigo == null?'INGRESO DE USUARIO':'ACTUALIZAR USUARIO'}"
+                             rendered="#{usuarioManagedBean.usuario != null}">
+
+
+                        <div align="center">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="CÓDIGO:"></p:outputLabel>
+                                <p:inputText value="#{usuarioManagedBean.usuario.codigo}"
+                                             disabled="true"></p:inputText>
+
+                                <p:outputLabel value="CEDULA"></p:outputLabel>
+                                <p:inputText value="#{usuarioManagedBean.usuario.cedula}"></p:inputText>
+
+                                <p:outputLabel value="NOMBRE:"></p:outputLabel>
+                                <p:inputText value="#{usuarioManagedBean.usuario.nombre}"></p:inputText>
+
+                                <p:outputLabel value="APELLIDO"></p:outputLabel>
+                                <p:inputText value="#{usuarioManagedBean.usuario.apellido}"></p:inputText>
+
+                                <p:outputLabel value="FECHA NACIMIENTO:"></p:outputLabel>
+                                <p:calendar value="#{usuarioManagedBean.usuario.fechaNacimiento}"></p:calendar>
+
+                            </h:panelGrid>
+                        </div>
+
+                        <div align="center">
+                            <p:commandButton value="CANCELAR" action="#{usuarioManagedBean.cancelar()}"
+                                             update="formprincipal"></p:commandButton>
+
+                            <p:commandButton value="GRABAR" action="#{usuarioManagedBean.grabar()}"
+                                             update="formprincipal"></p:commandButton>
+                        </div>
+
+
+                    </p:panel>
+
+                    <p:panel header="LISTA DE USUARIOS"
+                             rendered="#{usuarioManagedBean.usuario == null}">
+
+                        <div align="center">
+                            <p:commandButton value="NUEVO" action="#{usuarioManagedBean.nuevo()}"
+                                             update="formprincipal">
+                            </p:commandButton>
+                        </div>
+
+                        <p:dataTable id="tablaUsuario" value="#{usuarioManagedBean.listaUsuario}" var="car" >
+
+                            <p:column headerText="CÓDIGO">
+                                <p:outputLabel value="#{car.codigo}"></p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="CEDULA">
+                                <p:outputLabel value="#{car.cedula}"></p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="NOMBRE">
+                                <p:outputLabel value="#{car.nombre}"></p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="APELLIDO">
+                                <p:outputLabel value="#{car.apellido}"></p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="FECHA NACIMIENTO">
+                                <p:outputLabel value="#{car.fechaNacimiento}">
+                                <f:convertDateTime pattern="YYYY-MM-dd"></f:convertDateTime>
+                                </p:outputLabel>
+                            </p:column>
+
+
+                            <p:column headerText="EDITAR">
+                                <p:commandButton action="#{usuarioManagedBean.seleccionar(car)}"
+                                                 update="formprincipal"
+                                                 icon="ui-icon-check">
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:column headerText="ELIMINAR">
+                                <p:commandButton action="#{usuarioManagedBean.eliminar(car)}"
+                                                 update="formprincipal"
+                                                 icon="ui-icon-trash">
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>     
+
+
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

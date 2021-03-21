@@ -71,6 +71,7 @@ public class EstadoCivilManagedBean implements Serializable, ManagedBeanInterfac
     @Override
     public void cancelar() {
         estadoCivil = null;
+        listaEstadoCivil = estadoCivilFacadeLocal.findAll();
     }
 
     public List<EstadoCivil> getListaEstadoCivil() {

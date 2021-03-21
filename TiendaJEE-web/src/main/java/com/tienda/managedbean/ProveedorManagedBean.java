@@ -70,6 +70,7 @@ public class ProveedorManagedBean implements Serializable, ManagedBeanInterface<
     @Override
     public void cancelar() {
         proveedor = null;
+        listaProveedor = proveedorFacadeLocal.findAll();
     }
 
     public List<Proveedor> getListaProveedor() {

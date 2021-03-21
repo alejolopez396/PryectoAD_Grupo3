@@ -70,6 +70,7 @@ public class UsuarioManagedBean implements Serializable, ManagedBeanInterface<Us
     @Override
     public void cancelar() {
         usuario = null;
+        listaUsuario = usuarioFacadeLocal.findAll();
     }
 
     public List<Usuario> getListaUsuario() {

@@ -78,6 +78,7 @@ public class CargoManagedBean implements Serializable, ManagedBeanInterface<Carg
     @Override
     public void cancelar() {
         cargo = null;
+        listaCargos = cargoFacadeLocal.findAll();
     }
 
     public List<Cargo> getListaCargos() {
